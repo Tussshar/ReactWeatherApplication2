@@ -16,7 +16,10 @@ var About = React.createClass({
 //var About = function(props) {
 var About = (props) => {
     return (
-        <h3>About component</h3>
+        <div>
+            <h3>About component</h3>
+            <p>Welcome to About page!</p>
+        </div>
     )
 };
 module.exports = About;
