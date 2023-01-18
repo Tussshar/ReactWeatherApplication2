@@ -5,6 +5,15 @@ var express = require('express')
 // Create our app
 // To create the app call express library without passing any parameter.
 var app = express();
+const PORT = process.env.PORT || 3000;
+
+app.use(function(req, res, next) {
+  if (req.headers['x-forwarded-proto'] === 'http') {
+    next();
+  } else {
+    res.redirect('http://' + req.hostname + req.url);
+  }
+});
 
 // Tell the folder in which you want to serve.
 // app.use lets you add functioanality to your express application.
@@ -15,6 +24,6 @@ app.use(express.static('public'));
 // start the server
 // listen takes 2 arguments. port and a function which will get called
 // once the server is up.
-app.listen(3000, function() {
-  console.log('Express server is up on port 3000');
+app.listen(PORT, function() {
+  console.log('Express server is up on port ' + PORT);
 });
