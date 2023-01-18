@@ -1,6 +1,21 @@
+var webpack = require('webpack');
+
 // module.exports returns a object.
 module.exports = {
-    entry: './app/app.jsx', // Tells webpack where it should start processing your code.
+    entry: [
+        'script!jquery/dist/jquery.min.js',
+        'script!foundation-sites/dist/foundation.min.js',
+        './app/app.jsx'
+    ], // Tells webpack where it should start processing your code.
+    externals: {
+        jquery: 'jQuery'
+    },
+    plugins: [
+        new webpack.ProvidePlugin({
+            '$': 'jquery',
+            'jQuery': 'jquery'
+        })
+    ],
     output: {
         path: __dirname, // Gives path to the current folder.
         filename: './public/bundle.js'
